@@ -1,0 +1,21 @@
+= TCP Ping
+
+== Description
+This is small app which tests the tcp (Transmission Control Protocol) connection speed.
+The application can run as a pitcher or a catcher.
+Both require a port and host, while the pitcher also requires the size of messages.
+Once started the pitcher sends messages of the defined size to the catcher and the catcher returns a response.
+The pitcher measures the response speed and the number of messages returned.
+
+== Running the application
+Example of running the application
+------
+java -jar tcp-ping-0.0.1 –p –port 9900 –mps 30 –size 1000 -host 192.168.0.1
+(as a pitcher)
+
+java -jar  tcp-ping-0.0.1 –c –bind 192.168.0.1 –port 9900
+(as a catcher)
+------
+
+== Future improvements
+* Switch frame to JFX
