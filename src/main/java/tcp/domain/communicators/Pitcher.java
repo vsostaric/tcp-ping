@@ -5,7 +5,6 @@ import tcp.domain.Message;
 import tcp.domain.StatisticalData;
 import tcp.factory.Args;
 import tcp.frame.FrameController;
-import tcp.utils.DateUtils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -35,8 +34,6 @@ public final class Pitcher implements Communicator, Framed {
 
     private Integer poolSize;
 
-    private DateUtils dateUtils;
-
     private Pitcher(Args args) {
         super();
         this.port = args.getPort();
@@ -47,7 +44,6 @@ public final class Pitcher implements Communicator, Framed {
         this.poolSize = (args.getPitcherPoolSize() == null) ?
                 Integer.valueOf(getProperty(MESSAGE_POOL_SIZE_DEFAULT)) :
                 args.getPitcherPoolSize();
-        this.dateUtils = DateUtils.getInstance();
     }
 
     public static Pitcher getInstance(Args args) {
