@@ -1,26 +1,22 @@
 package tcp.domain;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.lang.StringUtils;
 import tcp.utils.DateUtils;
 
 import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 import java.util.UUID;
 
 import static tcp.main.TCPConfig.*;
 
-@Getter
 public class Message {
 
     private String messageContent;
 
     private String id;
 
-    @Setter
     private LocalDateTime timeSent;
 
-    @Setter
     private LocalDateTime timeReplied;
 
     private DateUtils dateUtils;
@@ -50,4 +46,27 @@ public class Message {
         return content;
     }
 
+    public Temporal getTimeSent() {
+        return timeSent;
+    }
+
+    public Temporal getTimeReplied() {
+        return timeReplied;
+    }
+
+    public void setTimeSent(LocalDateTime timeSent) {
+        this.timeSent = timeSent;
+    }
+
+    public String getMessageContent() {
+        return messageContent;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setTimeReplied(LocalDateTime timeReplied) {
+        this.timeReplied = timeReplied;
+    }
 }

@@ -2,9 +2,7 @@ package tcp.factory;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import lombok.Getter;
 
-@Getter
 public class Args {
 
     @Parameter(names = "-c", description = "Catcher work mode")
@@ -35,4 +33,35 @@ public class Args {
         JCommander.newBuilder().addObject(this).build().parse(args);
     }
 
+    public String getBind() {
+        return bind;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public Integer getMps() {
+        return mps;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public String getHostname() {
+        return hostname;
+    }
+
+    public Integer getPitcherPoolSize() {
+        return pitcherPoolSize;
+    }
+
+    public boolean isCatcher() {
+        return catcher;
+    }
+
+    public boolean isPitcher() {
+        return pitcher;
+    }
 }

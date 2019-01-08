@@ -6,7 +6,7 @@ import tcp.frame.FrameController;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public final class Catcher extends AbstractCommunicator {
+public final class Catcher implements Communicator {
 
     private static Catcher instance;
 
@@ -19,7 +19,7 @@ public final class Catcher extends AbstractCommunicator {
     @Override
     public void communicate() throws IOException {
 
-        super.communicate();
+        startFrame();
 
         try (ServerSocket listener = new ServerSocket(port)) {
             while (true) {
@@ -30,12 +30,12 @@ public final class Catcher extends AbstractCommunicator {
     }
 
     @Override
-    protected void openFrame() {
+    public void openFrame() {
         FrameController.getInstance().openFrame("Catcher Frame", "Catching on port " + port, 50);
     }
 
     @Override
-    protected void updateFrame() {
+    public void updateFrame() {
         FrameController.getInstance().updateFrame("Messages caught: " + messagesCaught, 20);
     }
 

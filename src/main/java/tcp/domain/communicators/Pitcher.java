@@ -1,6 +1,5 @@
 package tcp.domain.communicators;
 
-import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
 import tcp.domain.Message;
 import tcp.domain.StatisticalData;
@@ -22,8 +21,7 @@ import java.util.regex.Pattern;
 
 import static tcp.main.TCPConfig.*;
 
-@Getter
-public final class Pitcher extends AbstractCommunicator {
+public final class Pitcher implements Communicator {
 
     private static Pitcher instance;
 
@@ -43,10 +41,12 @@ public final class Pitcher extends AbstractCommunicator {
         super();
         this.port = args.getPort();
         this.messagePerSecond = args.getMps();
-        this.size = (args.getSize() == null) ? Integer.valueOf(getProperty(DEFAULT_MESSAGE_SIZE)) : args.getSize();
+        this.size = (args.getSize() == null) ?
+                Integer.valueOf(getProperty(DEFAULT_MESSAGE_SIZE)) : args.getSize();
         this.hostname = args.getHostname();
         this.poolSize = (args.getPitcherPoolSize() == null) ?
-                Integer.valueOf(getProperty(MESSAGE_POOL_SIZE_DEFAULT)) : args.getPitcherPoolSize();
+                Integer.valueOf(getProperty(MESSAGE_POOL_SIZE_DEFAULT)) :
+                args.getPitcherPoolSize();
         this.dateUtils = DateUtils.getInstance();
     }
 
@@ -64,7 +64,7 @@ public final class Pitcher extends AbstractCommunicator {
     @Override
     public void communicate() throws IOException {
 
-        super.communicate();
+        startFrame();
 
         ConcurrentHashMap<String, Message> sentMessages = new ConcurrentHashMap<>();
         StatisticalData data = StatisticalData.getInstance();
@@ -117,12 +117,12 @@ public final class Pitcher extends AbstractCommunicator {
     }
 
     @Override
-    protected void openFrame() {
+    public void openFrame() {
         FrameController.getInstance().openFrame("Pitcher Frame", "Pitching to " + hostname + ":" + port, 50);
     }
 
     @Override
-    protected void updateFrame() {
+    public void updateFrame() {
         FrameController.getInstance().updateFrame(StatisticalData.getInstance().showData(), 20);
     }
 

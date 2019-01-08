@@ -58,13 +58,16 @@ public final class StatisticalData {
 
         synchronized (this) {
 
-            addMessagesSent(1);
+            addMessagesSent();
 
             if (messagesSent - messagesSentOnLastSpeedUpdate >= minMessagesForSpeedUpdate) {
                 updateSpeed();
             }
 
-            long completeRespondTime = Duration.between(message.getTimeSent(), message.getTimeReplied()).toMillis();
+            long completeRespondTime =
+                    Duration.between(
+                            message.getTimeSent(),
+                            message.getTimeReplied()).toMillis();
 
             addToFullReplyTime(new BigDecimal(completeRespondTime));
 
@@ -76,7 +79,7 @@ public final class StatisticalData {
     public void messageNotReceived() {
 
         synchronized (this) {
-            addMessagesNotReceived(1);
+            addMessagesNotReceived();
         }
 
     }
@@ -94,12 +97,12 @@ public final class StatisticalData {
         return createDataMessage("\n", false);
     }
 
-    private void addMessagesSent(int add) {
-        messagesSent += add;
+    private void addMessagesSent() {
+        messagesSent += 1;
     }
 
-    private void addMessagesNotReceived(int add) {
-        messagesNotReplied += add;
+    private void addMessagesNotReceived() {
+        messagesNotReplied += 1;
     }
 
     private void updateSpeed() {
