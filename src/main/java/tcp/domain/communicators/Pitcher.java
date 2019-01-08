@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 import static tcp.main.TCPConfig.*;
 
-public final class Pitcher implements Communicator {
+public final class Pitcher implements Communicator, Framed {
 
     private static Pitcher instance;
 

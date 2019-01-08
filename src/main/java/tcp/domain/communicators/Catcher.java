@@ -6,7 +6,7 @@ import tcp.frame.FrameController;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public final class Catcher implements Communicator {
+public final class Catcher implements Communicator, Framed {
 
     private static Catcher instance;
 
