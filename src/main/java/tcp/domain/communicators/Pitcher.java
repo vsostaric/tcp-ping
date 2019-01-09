@@ -69,8 +69,8 @@ public final class Pitcher implements Communicator, Framed {
 
         data.start();
         Executors.newScheduledThreadPool(poolSize).scheduleAtFixedRate(() -> {
-            try (Socket socket = new Socket(hostname, port)) {
-                DataOutputStream dOut = new DataOutputStream(socket.getOutputStream());
+            try (Socket socket = new Socket(hostname, port);
+                 DataOutputStream dOut = new DataOutputStream(socket.getOutputStream())) {
 
                 LocalDateTime timeSent = LocalDateTime.now();
                 Message message = new Message(size, timeSent);
