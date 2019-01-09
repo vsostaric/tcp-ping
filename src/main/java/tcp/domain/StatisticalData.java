@@ -109,16 +109,20 @@ public final class StatisticalData {
         LocalTime updateTime = LocalTime.now();
         BigDecimal time = new BigDecimal(Duration.between(lastSpeedUpdate, updateTime).getSeconds());
 
-        if (!BigDecimal.ZERO.equals(time)) {
-            BigDecimal speed = BigDecimal.valueOf(messagesSent - messagesSentOnLastSpeedUpdate).divide(time, 2,
-                    RoundingMode.DOWN);
-
-            if (!BigDecimal.ZERO.equals(speed)) {
-                this.speed = speed;
-                this.lastSpeedUpdate = updateTime;
-                this.messagesSentOnLastSpeedUpdate = messagesSent;
-            }
+        if (BigDecimal.ZERO.equals(time)) {
+            return;
         }
+
+        BigDecimal speed = BigDecimal.valueOf(messagesSent - messagesSentOnLastSpeedUpdate).divide(time, 2,
+                RoundingMode.DOWN);
+
+        if (BigDecimal.ZERO.equals(speed)) {
+            return;
+        }
+
+        this.speed = speed;
+        this.lastSpeedUpdate = updateTime;
+        this.messagesSentOnLastSpeedUpdate = messagesSent;
 
     }
 
